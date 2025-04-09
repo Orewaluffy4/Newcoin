@@ -1,16 +1,14 @@
-#ifndef TRANSACTION_H
-#define TRANSACTION_H
-
+#pragma once
 #include <string>
+#include <ostream>
 
 class Transaction {
 public:
     std::string sender;
-    std::string receiver;
+    std::string recipient;
     double amount;
 
     Transaction(const std::string& from, const std::string& to, double amt);
-    std::string toString() const;
 };
 
-#endif // TRANSACTION_H
+std::ostream& operator<<(std::ostream& os, const Transaction& tx);
