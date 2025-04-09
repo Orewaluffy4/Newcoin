@@ -1,31 +1,30 @@
 #include "block.h"
-#include <ctime>
-#include <sstream>
-#include <iomanip>
-#include <openssl/sha.h>
+#include "transaction.h"
+#include <iostream>
+#include <vector>
 
-Block::Block(int idx, const std::vector<Transaction>& txs, const std::string& prevHash)
-    : index(idx), transactions(txs), previousHash(prevHash) {
-    time_t now = time(0);
-    timestamp = std::to_string(now);
-    hash = calculateHash();
-}
+int main() {
+    std::vector<Transaction> genesisTxs = {
+        Transaction("System", "Alice", 50.0),
+        Transaction("System", "Bob", 50.0)
+    };
 
-std::string Block::calculateHash() const {
-    std::stringstream ss;
-    ss << index << timestamp << previousHash;
-    for (const auto& tx : transactions) {
-        ss << tx.sender << tx.recipient << tx.amount;
+    Block genesis(0, genesisTxs, "0");
+    std::cout << "Genesis Block Hash: " << genesis.hash << "\n";
+    for (const auto& tx : genesis.transactions) {
+        std::cout << tx << "\n";
     }
 
-    std::string input = ss.str();
-    unsigned char hashOutput[SHA256_DIGEST_LENGTH];
-    SHA256(reinterpret_cast<const unsigned char*>(input.c_str()), input.size(), hashOutput);
+    std::vector<Transaction> block1Txs = {
+        Transaction("Alice", "Bob", 10.0),
+        Transaction("Bob", "Charlie", 5.0)
+    };
 
-    std::stringstream result;
-    for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i) {
-        result << std::hex << std::setw(2) << std::setfill('0') << (int)hashOutput[i];
+    Block block1(1, block1Txs, genesis.hash);
+    std::cout << "\nBlock 1 Hash: " << block1.hash << "\n";
+    for (const auto& tx : block1.transactions) {
+        std::cout << tx << "\n";
     }
 
-    return result.str();
+    return 0;
 }
