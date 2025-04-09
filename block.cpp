@@ -1,29 +1,31 @@
 #include "block.h"
-#include "featherhash.h"
+#include <ctime>
 #include <sstream>
+#include <iomanip>
+#include <openssl/sha.h>
 
 Block::Block(int idx, const std::vector<Transaction>& txs, const std::string& prevHash)
-    : index(idx), transactions(txs), previousHash(prevHash), nonce(0) {
-    timestamp = std::time(nullptr);
+    : index(idx), transactions(txs), previousHash(prevHash) {
+    time_t now = time(0);
+    timestamp = std::to_string(now);
     hash = calculateHash();
 }
 
 std::string Block::calculateHash() const {
     std::stringstream ss;
-    ss << index << timestamp << previousHash << nonce;
-
+    ss << index << timestamp << previousHash;
     for (const auto& tx : transactions) {
-        ss << tx.toString();
+        ss << tx.sender << tx.recipient << tx.amount;
     }
 
-    return FeatherHash::hash(ss.str());
-}
+    std::string input = ss.str();
+    unsigned char hashOutput[SHA256_DIGEST_LENGTH];
+    SHA256(reinterpret_cast<const unsigned char*>(input.c_str()), input.size(), hashOutput);
 
-void Block::mineBlock(uint32_t difficulty) {
-    std::string target(difficulty, '0');
+    std::stringstream result;
+    for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i) {
+        result << std::hex << std::setw(2) << std::setfill('0') << (int)hashOutput[i];
+    }
 
-    do {
-        nonce++;
-        hash = calculateHash();
-    } while (hash.substr(0, difficulty) != target);
+    return result.str();
 }
