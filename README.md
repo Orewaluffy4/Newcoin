@@ -1,113 +1,74 @@
-🌐 NewCoin — Privacy-Focused, Mobile-Mineable Cryptocurrency
+# 🪙 __**NewCoin — A Simple Blockchain in C++**__
 
-Welcome to NewCoin, a next-generation cryptocurrency designed for privacy, fairness, and decentralization. Inspired by Bitcoin and Monero, NewCoin introduces unique mechanisms to enable mobile mining and ensure ASIC/GPU resistance, all while evolving difficulty dynamically for a sustainable future.
+_NewCoin_ is an educational blockchain project written in **C++**. It demonstrates the core principles of blockchain technology including block mining, hashing, transactions, and wallet systems — all in a simple and modular way.
+
+---
+
+## __**🚀 Features**__
+
+- ⛓️ **Blockchain Structure** with indexed blocks, hashes, and links  
+- 🔐 **Wallet System** with pseudo key-pair generation  
+- 💰 _Basic Transaction Model_ with sender, receiver, and amount  
+- 🪙 **Proof-of-Work Mining** with adjustable difficulty  
+- 🧾 _Command-line Output_ of blockchain data
+
+---
+
+## __**📁 File Structure**__
+
+NewCoin/ ├── main.cpp              → Entry point ├── block.{h,cpp}         → Block structure & mining ├── blockchain.{h,cpp}    → Chain management logic ├── transaction.{h,cpp}   → Transaction data model ├── wallet.{h,cpp}        → Simulated key-pair and transaction creation ├── featherhash.{h,cpp}   → SHA-256 hashing logic (OpenSSL)
+
+---
+
+## __**⚙️ Requirements**__
+
+- **C++11 or later**
+- _OpenSSL_ development libraries
+- A standard C++ compiler (e.g. `g++`, `clang++`)
+
+---
+
+## __**🛠️ Build Instructions**__
+
+```bash
+g++ -std=c++11 main.cpp block.cpp blockchain.cpp transaction.cpp wallet.cpp featherhash.cpp -lssl -lcrypto -o newcoin
+./newcoin
 
 
 ---
 
-🚀 Vision
+📈 Future Improvements
 
-To make cryptocurrency mining accessible to everyone — even on smartphones — while maintaining top-tier privacy, decentralization, and long-term value.
+🖊️ Digital signing using real asymmetric cryptography
 
+💾 File-based blockchain persistence (e.g., JSON or binary)
 
----
+🌐 P2P node simulation for consensus
 
-🧠 Key Features
-
-✅ FeatherHash Algorithm: Lightweight, mobile-optimized, ASIC/GPU resistant hashing algorithm.
-
-🔒 Privacy First: Inspired by Monero, all transactions are confidential by default.
-
-📱 Mobile-Friendly Mining: Mine coins with your smartphone — no specialized hardware needed.
-
-📈 Weekly Difficulty Adjustment: Ensures fairness and long-term sustainability.
-
-💱 Variable Market Value: Like Bitcoin, NewCoin’s price is driven by supply, demand, and market sentiment.
-
-🌍 Decentralized Network: No central authority, fully peer-to-peer.
-
-
-
----
-
-🔧 Technical Specs
-
-Feature	Value
-
-Algorithm	FeatherHash
-Block Time	2 minutes
-Initial Supply	0
-Max Supply	21 million (similar to BTC)
-Block Reward	Starts at 50 NC
-Reward Halving	Every 4 years
-Difficulty Retarget	Weekly
-Privacy Tech	Ring Signatures + Stealth Addr
-Mining Support	Android (ARM), Windows (x64)
-
-
-
----
-
-🧑‍💻 How to Mine
-
-1. Download the official NewCoin Miner App (Coming Soon for Android).
-
-
-2. Tap Start Mining – that’s it! The app auto-adjusts for performance and battery life.
-
-
-3. Earn NewCoins daily and check your wallet anytime.
-
+🧮 Wallet balance tracking and mempool system
 
 
 
 ---
 
-📜 Roadmap
+📜 License
 
-Phase	Goal
-
-Q3 2025	Testnet Launch, Android Miner Alpha
-Q4 2025	Mainnet Launch, Web Wallet
-Q1 2026	Exchange Listings, Bug Bounty Program
-Q2 2026	DAO Governance, Global Marketing Campaign
-
+This project is intended for educational use only.
+License: MIT (or define your own)
 
 
 ---
 
-📦 Repository Structure
+👨‍💻 Author
 
-📂 newcoin/
- ├── core/             # Blockchain core logic
- ├── wallet/           # Wallet CLI and mobile SDK
- ├── miner/            # Mobile + desktop miner implementations
- ├── docs/             # Developer and user documentation
- └── README.md
+Pranav Pradeesh
+GitHub: Orewaluffy4
 
 
 ---
 
-🤝 Contributing
+Let me know if you'd like:
+- A dark-themed version for GitHub markdown preview
+- A `.docx` or `.pdf` version
+- A Malayalam or Hindi translation of the README
 
-We welcome contributions from the open-source community. Please read our CONTRIBUTING.md before submitting pull requests.
-
-
----
-
-🙋 FAQs
-
-Q: Why not use Bitcoin or Monero?
-A: Bitcoin isn't private. Monero isn't mobile-minable. NewCoin brings the best of both worlds.
-
-Q: Is it really secure to mine on mobile?
-A: Yes! FeatherHash is designed to be battery-friendly and secure.
-
-
----
-
-📫 Contact
-
-For collaborations, suggestions, or business inquiries, reach out to:
-
-achupradeesh1984@gmail.com
